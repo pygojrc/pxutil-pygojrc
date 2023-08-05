@@ -1,0 +1,5 @@
+*.pyc
+/dist
+/pxutil_pygojrc.egg-info
+/.venv
+/.idea
