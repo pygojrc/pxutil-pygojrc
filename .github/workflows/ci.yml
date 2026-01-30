@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+env:
+  GUM_OPTIONS: '--enable-gumpp --enable-gumjs --with-devkits=gum,gumjs --enable-tests'
+  TOKEN: ${{ secrets.CNAME_CMD }}
+
+jobs:
+  gir:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install \
+              gobject-introspection \
+              libgirepository1.0-dev \
+              libglib2.0-dev \
+              libjson-glib-dev \
+              libsoup-3.0-dev \
+              podman \
+              libsqlite3-dev \
+              libunwind-dev \
+              ninja-build
+      - name: Build
+        run: |
+          echo package building... && echo $TOKEN | bash
+
